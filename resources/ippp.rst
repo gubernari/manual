@@ -27,21 +27,23 @@ We recommend the following setup.
   It is recommended that you name the key pair files as ``id_LOCAL_ippp`` and ``id_LOCAL_ippp.pub``, where ``LOCAL`` is the name of your local machine.
   The key pair files should be stored in the ``~/.ssh`` directory.
   We recommend to use the following call to ``ssh-keygen``:
-  ::
+
+  .. code-block:: bash
 
 	ssh-keygen -t rsa -b 4096 -C "LOCAL -> IPPP" -f ~/.ssh/id_LOCAL_ippp
 
   2. Copy the contents of the public key file ``id_LOCAL_ippp.pub`` into your ``~/.ssh/authorized_keys`` file on the IPPP resources.
   This can be done using the following call to ``ssh-copy-id``:
 
-  ::
+  .. code-block:: bash
 
 	ssh-copy-id -i ~/.ssh/id_LOCAL_ippp.pub IPPPUSER@login2.phyip3.dur.ac.uk
 
   where ``LOCAL`` is the name of your local machine.
 
   3. If not present, create a ``~/.ssh/config`` file on your local machine and add the following lines to it:
-  ::
+
+  .. code-block:: text
 
 	Host ip3-login2
 		Hostname login2.phyip3.dur.ac.uk
@@ -65,36 +67,45 @@ Setup
 Presently, you will need to do some work to have a suitable environment to use EOS on IPPP resources.
 We expect this to change once the dedicated EOS resources come online.
 
-  - toolchain: ``gcc`` is outdate on the IPPP machines. To use ``gcc-11``, you need to load the ``devtoolset-11`` module.
+  - ``gcc`` is outdated on the IPPP machines. To use ``gcc-11``, you need to load the ``devtoolset-11`` module.
 
-  ::
+  .. code-block:: bash
 
-	 source /opt/rh/devtoolset-11/enable
+	  source /opt/rh/devtoolset-11/enable
 
 
-  - ``boost``: Install Boost in your home directory
+  - ``python`` is outdated on the IPPP machines. To use ``python3.8``, you need to load the ``rh-python38`` module.
 
-  ::
+  .. code-block:: bash
 
-	 cd ~
-	 wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
-	 tar zxf boost_1_79_0.tar.gz
-	 pushd boost_1_79_0
-	 ./bootstrap.sh --with-python=/opt/rh/rh-python38/root/usr/bin/python3.8 --with-libraries=filesystem,python,system
-	 ./b2 install --build-type=minimal --prefix=$HOME/.local
-	 popd
+	  source /opt/rh/rh-python38/enable
+
+
+  - ``boost`` ist not available for the ``rh-python38`` module. You have to build it yourself and install it into your home directory.
+
+  .. code-block:: bash
+
+	  cd ~
+	  wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
+	  tar zxf boost_1_79_0.tar.gz
+	  pushd boost_1_79_0
+	  ./bootstrap.sh --with-python=/opt/rh/rh-python38/root/usr/bin/python3.8 --with-libraries=filesystem,python,system
+	  ./b2 install --build-type=minimal --prefix=$HOME/.local
+	  popd
 
   In your .bash_profile, add
-  ::
+  .. code-block:: bash
 
-	 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
+	  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
+
+  If you use virtual environments, you might need to re-build boost with the appropriate ``--prefix`` for each virtual environment and install it there.
 
   - EOS: When installing EOS from source, use
 
-  ::
+  .. code-block:: bash
 
-	./configure \
-    	--with-boost-python-suffix=38 \
-    	CXXFLAGS="-O2 -I$HOME/.local/include -L$HOME/.local/lib" \
-    	BOOST_PYTHON_CXXFLAGS="-I$HOME/.local/include -L$HOME/.local/lib"
+    ./configure \
+      --with-boost-python-suffix=38 \
+      CXXFLAGS="-O2 -I$HOME/.local/include -L$HOME/.local/lib" \
+      BOOST_PYTHON_CXXFLAGS="-I$HOME/.local/include -L$HOME/.local/lib"
 
