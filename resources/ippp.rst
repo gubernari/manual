@@ -94,6 +94,7 @@ We expect this to change once the dedicated EOS resources come online.
 	  popd
 
   In your .bash_profile, add
+
   .. code-block:: bash
 
 	  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
