@@ -5,6 +5,7 @@ EOS Collaboration
    :maxdepth: 2
    :caption: Contents:
 
+   people
    resources/ippp
 
 
