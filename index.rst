@@ -7,6 +7,7 @@ EOS Collaboration
 
    people
    resources/ippp
+   setup
 
 
 
