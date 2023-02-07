@@ -124,7 +124,8 @@ We expect this to change once the dedicated EOS resources come online.
 
   If you use virtual environments, you might need to re-build boost with the appropriate ``--prefix`` for each virtual environment and install it there.
 
-  - EOS: When installing EOS from source, use
+  - ``EOS`` should be installed from source by following the instructions given `here <https://eos.github.io/doc/installation.html#installing-eos>`_.
+    When installing EOS from source, use the following ``configure`` call instead:
 
   .. code-block:: bash
 
