@@ -36,6 +36,12 @@ You might need to create this directory first. To run your analyses, it might be
 Access
 ~~~~~~
 
+.. note::
+
+   Once your receive your IPPP credentials, please login once using your password only. You will be prompted to
+   choose a new password. Please choose a strong password and do not forget it.
+   Only setup your SSH key as documented below **after** your first login and successful password change.
+
 Access is possible through SSH using your IPPP username (shown as ``USERNAME`` below) and password.
 We recommend the following setup.
 
