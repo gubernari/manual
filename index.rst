@@ -6,6 +6,7 @@ EOS Collaboration
    :caption: Contents:
 
    people
+   procedures/analysis
    resources/ippp
    setup
 
