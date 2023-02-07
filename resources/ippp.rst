@@ -106,6 +106,7 @@ We expect this to change once the dedicated EOS resources come online.
   .. code-block:: bash
 
     ./configure \
+      --prefix=$HOME/.local \
       --with-boost-python-suffix=38 \
       CXXFLAGS="-O2 -I$HOME/.local/include -L$HOME/.local/lib" \
       BOOST_PYTHON_CXXFLAGS="-I$HOME/.local/include -L$HOME/.local/lib"
