@@ -104,10 +104,11 @@ Once the analysis is complete, one of the `admins <../people#admin-access>`_ rel
 
    .. code-block:: none
 
-		$ git checkout --orphan tmp gh-analysis-YEAR-IDX/master
+    $ git remote add gh-analysis-AYEAR-AIDX ssh://github/eos/analysis-AYEAR-AIDX
+		$ git checkout --orphan tmp gh-analysis-AYEAR-AIDX/master
 		$ git commit -m "EOS/DATA-DYEAR-DIDX: Supplementary material for EOS/ANALYSIS-AYEAR-AIDX"
-		$ git tag DATA-DYEAR-DIDX
-		$ git push gh refs/tags/DATA-DYEAR-DIDX
+		$ git tag DYEAR-DIDX
+		$ git push gh refs/tags/DYEAR-DIDX
 
  - creating a new release within ``eos/data`` for the new tag, triggering a release on Zenodo;
- - linking the dataset to the publication entry on the EOS website.
+ - linking the dataset in the file ``README.md`` in the ``master`` branch of ``eos/data``
