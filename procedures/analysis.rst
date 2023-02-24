@@ -11,7 +11,7 @@ The repository's description should list the topic and authors of the analysis i
 
 .. code-block:: none
 
-	Description of the Physics [F. Author, S. Authors, ...]
+    Description of the Physics [F. Author, S. Authors, ...]
 
 The repository should be created as a private repository and the `admins <../people#admin-access>`_ should add the
 invidivual authors as collaborators.
@@ -104,11 +104,12 @@ Once the analysis is complete, one of the `admins <../people#admin-access>`_ rel
 
    .. code-block:: none
 
-    $ git remote add gh-analysis-AYEAR-AIDX ssh://github/eos/analysis-AYEAR-AIDX
-		$ git checkout --orphan tmp gh-analysis-AYEAR-AIDX/master
-		$ git commit -m "EOS/DATA-DYEAR-DIDX: Supplementary material for EOS/ANALYSIS-AYEAR-AIDX"
-		$ git tag DYEAR-DIDX
-		$ git push gh refs/tags/DYEAR-DIDX
+      $ git remote add gh-analysis-AYEAR-AIDX ssh://github/eos/analysis-AYEAR-AIDX
+      $ git checkout --orphan tmp gh-analysis-AYEAR-AIDX/master
+      $ git commit -m "EOS/DATA-DYEAR-DIDX: Supplementary material for EOS/ANALYSIS-AYEAR-AIDX"
+      $ git tag DYEAR-DIDX
+      $ git push gh refs/tags/DYEAR-DIDX
+
 
  - creating a new release within ``eos/data`` for the new tag, triggering a release on Zenodo;
  - linking the dataset in the file ``README.md`` in the ``master`` branch of ``eos/data``
