@@ -9,11 +9,8 @@ At IPPP, EOS collaboration members can use any of the following computing resour
 ``login2``
   Login gateway to the IPPP infrastructure, do NOT use for any computations.
 
-``ip3-ws4``
-  40-core Intel XEON E5-2630 v4 @ 2.20GHz, 78GB RAM; shared amongst all IPPP users.
-
-``ip3-wsXXX``
-  (unavailable as of January 2023) upcoming workstation for exclusive use by EOS collaboration members.
+``ip3-ws16``
+  AMD EPYC 74F3 (48Cores/96Threads) @ 3.2Ghz, 256GB RAM; exclusive to EOS collaboration members.
 
 
 Storage
@@ -73,56 +70,32 @@ We recommend the following setup.
 		User IPPPUSERNAME
 		IdentityFile ~/.ssh/id_LOCAL_ippp
 
-	Host ip3-ws4
-		HostName ip3-ws4.phyip3.dur.ac.uk
+	Host ip3-ws16
+		HostName ip3-ws16.phyip3.dur.ac.uk
 		ProxyCommand ssh ip3-login2 -W %h:%p
 		User IPPPUSERNAME
 		IdentityFile ~/.ssh/id_LOCAL_ippp
 
-  4. You can now use ``ip3-ws4`` in lieu of the full hostname ``ip3-ws4.phyip3.dur.ac.uk``.
-  Connecting to ``ip3-ws4`` is now as simple as typing ``ssh ip3-ws4``.
+  4. You can now use ``ip3-ws16`` in lieu of the full hostname ``ip3-ws16.phyip3.dur.ac.uk``.
+  Connecting to ``ip3-ws16`` is now as simple as typing ``ssh ip3-ws4`` on your local computer.
   Copying files to the IPPP system can be achieved by using ``scp LOCALFILE ip3-login2:REMOTEFILE``.
 
 
 Setup
 ~~~~~
 
-Presently, you will need to do some work to have a suitable environment to use EOS on IPPP resources.
-We expect this to change once the dedicated EOS resources come online.
+With ``ip3-ws16`` we have an up-to-date computing environment based on RedHat Enterprise Linux 9.
+The specific distribution is called `Rocky Linux 9 <https://rockylinux.org/>`_.
 
-  - ``gcc`` is outdated on the IPPP machines. To use ``gcc-11``, you need to load the ``devtoolset-11`` module.
-
-  .. code-block:: bash
-
-	  source /opt/rh/devtoolset-11/enable
-
-
-  - ``python`` is outdated on the IPPP machines. To use ``python3.8``, you need to load the ``rh-python38`` module.
+  - Install the following Python packages into your home directory:
 
   .. code-block:: bash
 
-	  source /opt/rh/rh-python38/enable
+    pip3.9 install \
+      --user dynesty matplotlib networkx numpy pypmc scipy wilson \
+      jupyter nbconvert pandoc pyyaml \
+      sphinx sphinx-argparse sphinx-rtd-theme sphinxcontrib-contentui nbsphinx
 
-
-  - ``boost`` ist not available for the ``rh-python38`` module. You have to build it yourself and install it into your home directory.
-
-  .. code-block:: bash
-
-	  cd ~
-	  wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
-	  tar zxf boost_1_79_0.tar.gz
-	  pushd boost_1_79_0
-	  ./bootstrap.sh --with-python=/opt/rh/rh-python38/root/usr/bin/python3.8 --with-libraries=filesystem,python,system
-	  ./b2 install --build-type=minimal --prefix=$HOME/.local
-	  popd
-
-  In your .bash_profile, add
-
-  .. code-block:: bash
-
-	  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
-
-  If you use virtual environments, you might need to re-build boost with the appropriate ``--prefix`` for each virtual environment and install it there.
 
   - ``EOS`` should be installed from source by following the instructions given `here <https://eos.github.io/doc/installation.html#installing-eos>`_.
     When installing EOS from source, use the following ``configure`` call instead:
@@ -131,7 +104,5 @@ We expect this to change once the dedicated EOS resources come online.
 
     ./configure \
       --prefix=$HOME/.local \
-      --with-boost-python-suffix=38 \
-      CXXFLAGS="-O2 -I$HOME/.local/include -L$HOME/.local/lib" \
-      BOOST_PYTHON_CXXFLAGS="-I$HOME/.local/include -L$HOME/.local/lib"
+      --with-boost-python-suffix=39
 
