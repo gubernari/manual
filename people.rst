@@ -25,6 +25,8 @@ The following people have access to the IPPP resources at the moment:
 +====================+=================+=================+=================+
 | Carolina Bolognani | Maastricht U    | cbolognani      | **n/a**         |
 +--------------------+-----------------+-----------------+-----------------+
+| Lorenz Gärtner     | LMU Munich      | lorenzennio     | **n/a**         |
++--------------------+-----------------+-----------------+-----------------+
 | Nico Gubernari     | Siegen U        | gubernari       | ngubernari      |
 +--------------------+-----------------+-----------------+-----------------+
 | Filip Novak        | TU Munich       | fnovak42        | fnovak          |
