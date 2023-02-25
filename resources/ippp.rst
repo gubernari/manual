@@ -77,8 +77,31 @@ We recommend the following setup.
 		IdentityFile ~/.ssh/id_LOCAL_ippp
 
   4. You can now use ``ip3-ws16`` in lieu of the full hostname ``ip3-ws16.phyip3.dur.ac.uk``.
-  Connecting to ``ip3-ws16`` is now as simple as typing ``ssh ip3-ws4`` on your local computer.
+  Connecting to ``ip3-ws16`` is now as simple as typing ``ssh ip3-ws16`` on your local computer.
   Copying files to the IPPP system can be achieved by using ``scp LOCALFILE ip3-login2:REMOTEFILE``.
+
+Access for Windows users
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The procedure for Windows users is similar to the one described above
+with the following differences in points 2. and 3.:
+
+  2. The command to the contents of the public key file ``id_LOCAL_ippp.pub``
+  into your ``~/.ssh/authorized_keys`` file on the IPPP resources is
+
+  .. code-block:: bash
+
+     type $env:USERPROFILE\.ssh\id_LOCAL_ippp.pub | ssh IPPPUSER@login2.phyip3.dur.ac.uk "cat >> .ssh/authorized_keys"
+
+  3. The IdentityFile path should be adjusted to its actual location on your Windows machine
+
+If when connecting to ``ip3-login2`` or ``ip3-ws16`` still asks you for your password
+you might have to run the following commang after connecting to ``ip3-login2``:
+
+.. code-block:: bash
+
+   chmod -R 700 ~/.ssh
+
 
 
 Setup
